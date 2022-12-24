@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unestverse</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
+        integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./lottie.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+
+        }
+
+        .container {
+
+            position: absolute;
+            background-image: url('./image/background.png');
+            background-size: 50vw;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loginPage {
+            cursor: none;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        #naozi1 {
+            height: 65vh;
+            z-index: 1;
+        }
+        
+
+        #loginBox {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            width: 50vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+        }
+        #login{
+            position: relative;
+            width: 50%;
+            transform: translate(12.5vw,3vw)
+
+        }
+        
+
+        #piBox {
+            background-color: #fff;
+            border-radius: 100px;
+            padding: 20px;
+            height: 30px;
+
+
+        }
+
+        #piBox img {
+            width: 80%;
+            transform: translate(4.5vw)
+        }
+
+        #clickBlue {
+            width: 50px;
+            align-self: center;
+        }
+
+        #clickBlue:hover {
+            transform: scale(1.5);
+        }
+
+        #passwordImg {
+            pointer-events: none;
+            width: 120px;
+            z-index: 2;
+            transform: translate(-70px, -40px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #siweiren {
+            width: 100vw;
+        }
+
+        #naozi2 {
+            width: 28vw;
+            transform: translate(-0.7vw,-9vw);
+
+            transition: all;
+        }
+
+        #naozi2:hover {
+            cursor: pointer;
+            filter: hue-rotate(10deg);
+        }
+
+        #earth {
+            transform: translate(-6vw, -10vw) scale(0.02);
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+        #earth:hover{
+            transform: translate(-6vw, -10vw) scale(0.03);
+        }
+
+        #thirdPage {
+            z-index: 10;
+        }
+
+        #sanweiren {
+            width: 100vw;
+        }
+
+        #threetwod {
+            width: 50vw;
+            right: 10vw;
+            bottom: 5vw;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        #threetwod:hover {
+            transform: translateY(-10px);
+
+        }
+
+        #aniPage {
+            z-index: 30;
+        }
+
+        canvas{
+            position: relative;
+            z-index: 50;
+            /* height: 100vh; */
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="loginPage" class="container">
+
+        <img id="naozi1" class="absolute " src="./image/siweinaozi.gif" alt="">
+        
+        <div id="loginBox">
+            <img id=welcome src="./image/welcome.png" alt="">
+
+            <div id="piBox">
+                <img src="./image/pi.png" id="piImg" class="hidden" alt="">
+            </div>
+            <img id="clickBlue" src="./image/clickblue.png" alt="">
+            <div>
+                <img id="login" src="./image/login.png" alt="">
+            </div>
+        </div>
+        <img id="passwordImg" class="absolute" src="./image/password.png" alt="" id="password">
+    </section>
+
+    <section id="mainPage" class="container hidden ">
+        <img class="absolute" id="siweiren" src="./image/siweiren.png" alt="">
+        <img class="absolute" id="naozi2" src="./image/siweinaozi.gif" alt="">
+        <img id="earth" src="./image/earth.png" alt=""> 
+    </section>
+
+    <section id="thirdPage" class="container hidden  ">
+        <img id="sanweiren" src="./image/sanweiren.png" alt="">
+        <img id="threetwod" class="absolute" src="./image/threetwod.png" alt="">
+    </section>
+
+    <section id="aniPage" class="container hidden">
+
+    </section>
+
+
+    <script>
+        // let size = 5012332132
+        // let title = 'Project'
+
+        // let loginPageShow = true
+
+        // let titles = ['project1','project2','project3']
+
+        // let myProject = {
+        //     name:'project name',
+        //     isDone: false,
+        //     imageCount:12,
+        //     makeItHappen(){
+        //         console.log('my project is:' + this.name);
+        //     }
+        // }
+
+        let passwordShow = false
+        let page1Show = true
+        let page2Show = false
+
+        const passwordImg = document.querySelector('#passwordImg')
+        const clickBlue = document.querySelector('#clickBlue')
+        const piImg = document.querySelector('#piImg')
+        const naozi2 = document.querySelector('#naozi2')
+        const siweiren = document.querySelector('#siweiren')
+        const earth = document.querySelector('#earth')
+        const threetwod = document.querySelector('#threetwod')
+
+        const loginPage = document.querySelector('#loginPage')
+        const mainPage = document.querySelector('#mainPage')
+        const thirdPage = document.querySelector('#thirdPage')
+        const aniPage = document.querySelector('#aniPage')
+
+        const ani = lottie.loadAnimation({
+            container: aniPage, // the dom element that will contain the animation
+            renderer: 'svg',
+            loop: true,
+            autoplay: false,
+            path: './image/twodroom.json' // the path to the animation json
+        
+        });
+
+        let currentFrame = 0
+        window.addEventListener('mousemove', function (e) {
+
+            passwordImg.style.left = e.clientX + 'px'
+            passwordImg.style.top = e.clientY + 'px'
+
+            currentFrame+=1
+            ani.goToAndStop(Math.floor(currentFrame/3)%ani.totalFrames,true)
+        })
+
+        clickBlue.addEventListener('click', function () {
+            if (passwordShow) {
+                loginPage.classList.toggle('hidden')
+                mainPage.classList.toggle('hidden')
+            } else {
+                piImg.classList.toggle('hidden')
+                passwordShow = true
+            }
+
+        })
+
+        naozi2.addEventListener('click', () => {
+            gsap.to(mainPage, { scale: 2.4, y: '20vw', duration: 2 })
+        })
+
+        earth.addEventListener('click', () => {
+            gsap.to(mainPage, { scale: '+=2', x: 0, y: 0, duration: 2 })
+            gsap.to(naozi2, { opacity: 0, duration: 2 })
+            gsap.to(siweiren, { opacity: 0, duration: 2 })
+            gsap.to(earth, { scale: 0.7, x: '-2vw', y: '30vh', duration: 3, onComplete: completed })
+        })
+
+        function completed() {
+            thirdPage.classList.toggle('hidden')
+            mainPage.classList.add('hidden')
+        }
+
+        threetwod.addEventListener('click', () => {
+            thirdPage.classList.toggle('hidden')
+            aniPage.classList.toggle('hidden')
+           mainPage.classList.add('hidden')
+        //    earth.classList.toggle('hidden')
+        
+        })
+
+        
+
+
+    </script>
+</body>
+
+</html>
